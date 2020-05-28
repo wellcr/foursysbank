@@ -1,45 +1,37 @@
-class NegociacoesView {
-    
-    private _elemento : Element;
+namespace Views{
+    export class NegociacoesView extends Views.View<Negociacoes>{
 
-    constructor(seletor: string){
-        this._elemento =  document.querySelector(seletor);
-    }
-
-    update(model: Negociacoes): void{
-        this._elemento.innerHTML = this.template(model);
-    }
-
-    template(model: Negociacoes): string {
+        template(model: Negociacoes): string {
+            
+            return `
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>DATA</th>
+                            <th>QUANTIDADE</th>
+                            <th>VALOR</th>
+                            <th>VOLUME</th>
+                        </tr>
+                    </thead>
         
-        return `
-            <table class="table table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th>DATA</th>
-                        <th>QUANTIDADE</th>
-                        <th>VALOR</th>
-                        <th>VOLUME</th>
-                    </tr>
-                </thead>
+                    <tbody>
+                    </tbody>   
     
-                <tbody>
-                </tbody>   
-
-                ${model.retornaArray().map(negociacao=>
-                
-                `<tr>
-                    <td>${negociacao.data.getUTCDate()}/${negociacao.data.getMonth() + 1}/${negociacao.data.getFullYear()}</td>
-                    <td>${negociacao.quantidade}</td>
-                    <td>${negociacao.valor}</td>
-                    <td>${negociacao.volume}</td>
-                </tr>                        
-                `).join('')}
-                
-                
-               <tfoot>
-                </tfoot>
-            </table>               
-            `
+                    ${model.retornaArray().map(negociacao=>
+                    
+                    `<tr>
+                        <td>${negociacao.data.getUTCDate()}/${negociacao.data.getMonth() + 1}/${negociacao.data.getFullYear()}</td>
+                        <td>${negociacao.quantidade}</td>
+                        <td>${negociacao.valor}</td>
+                        <td>${negociacao.volume}</td>
+                    </tr>                        
+                    `).join('')}
+                    
+                    
+                   <tfoot>
+                    </tfoot>
+                </table>               
+                `
+        }
     }
 }
